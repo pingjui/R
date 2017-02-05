@@ -15,15 +15,15 @@ markets <- list( test.list, tw.list, sh.list, sz.list )
 markets_counts <- c( test = nrow(test.list), tw = nrow(tw.list), sh = nrow(sh.list), sz = nrow(sz.list))
 
 # Get stock data
-for ( x in 1:markets_counts[2] ){
-  getSymbols(toString(tw.list[x,1]), src="yahoo", from="2017/01/01")
-}
-
-
-
-
 for ( x in 1:file_count ){
   for ( y in 1:markets_counts[x]){
-    getSymbols(toString( markets[[x]][y,1]), src="yahoo", from="2017/01/01")
+    try(
+      getSymbols(toString( markets[[x]][y,1]), src="yahoo", from="2017/01/01"), silent = FALSE)
+      print(markets[[x]][y,1])
   }
 }
+
+
+
+
+
